@@ -1,0 +1,951 @@
+definitions:
+  models.Car:
+    properties:
+      crated_at:
+        type: string
+      daily_limit:
+        type: integer
+      id:
+        type: string
+      investor_id:
+        type: string
+      investor_percentage:
+        type: number
+      km:
+        type: integer
+      model:
+        type: string
+      over_limit:
+        type: integer
+      price:
+        type: number
+      state_number:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Client:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.CreateCar:
+    properties:
+      daily_limit:
+        type: integer
+      investor_id:
+        type: string
+      investor_percentage:
+        type: number
+      km:
+        type: integer
+      model:
+        type: string
+      over_limit:
+        type: integer
+      price:
+        type: number
+      state_number:
+        type: string
+    type: object
+  models.CreateClient:
+    properties:
+      address:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  models.CreateInvestor:
+    properties:
+      name:
+        type: string
+    type: object
+  models.CreateOrder:
+    properties:
+      car_id:
+        type: string
+      client_id:
+        type: string
+      day_count:
+        type: integer
+      give_km:
+        type: integer
+      paid_price:
+        type: number
+      recieve_km:
+        type: integer
+      total_price:
+        type: number
+    type: object
+  models.Empty:
+    type: object
+  models.GetListCarResponse:
+    properties:
+      cars:
+        items:
+          $ref: '#/definitions/models.Car'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.GetListClientResponse:
+    properties:
+      clients:
+        items:
+          $ref: '#/definitions/models.Client'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.GetListInvestorResponse:
+    properties:
+      count:
+        type: integer
+      investors:
+        items:
+          $ref: '#/definitions/models.Investor'
+        type: array
+    type: object
+  models.GetListInvestorResponseFoyda:
+    properties:
+      count:
+        type: integer
+      investors:
+        items:
+          $ref: '#/definitions/models.InvestorFoyda'
+        type: array
+    type: object
+  models.GetListOrderResponse:
+    properties:
+      count:
+        type: integer
+      orders:
+        items:
+          $ref: '#/definitions/models.Order'
+        type: array
+    type: object
+  models.Investor:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.InvestorFoyda:
+    properties:
+      investor_id:
+        type: string
+      name:
+        type: string
+      sum:
+        type: number
+    type: object
+  models.Order:
+    properties:
+      car_id:
+        type: string
+      client_id:
+        type: string
+      created_at:
+        type: string
+      day_count:
+        type: integer
+      give_km:
+        type: integer
+      id:
+        type: string
+      paid_price:
+        type: number
+      recieve_km:
+        type: integer
+      status:
+        type: string
+      total_price:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  models.UpdateCarSwag:
+    properties:
+      daily_limit:
+        type: integer
+      investor_id:
+        type: string
+      investor_percentage:
+        type: number
+      km:
+        type: integer
+      model:
+        type: string
+      over_limit:
+        type: integer
+      price:
+        type: number
+      state_number:
+        type: string
+      status:
+        type: string
+    type: object
+  models.UpdateClientSwag:
+    properties:
+      address:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  models.UpdateInvestorSwag:
+    properties:
+      name:
+        type: string
+    type: object
+  models.UpdateOrderSwag:
+    properties:
+      car_id:
+        type: string
+      client_id:
+        type: string
+      day_count:
+        type: integer
+      give_km:
+        type: integer
+      paid_price:
+        type: number
+      recieve_km:
+        type: integer
+      status:
+        type: string
+      total_price:
+        type: number
+    type: object
+  models.UpdateStatusSwag:
+    properties:
+      status:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /car:
+    get:
+      consumes:
+      - application/json
+      description: Get List Car
+      operationId: get_list_car
+      parameters:
+      - description: offset
+        in: query
+        name: offset
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetCarListBody
+          schema:
+            $ref: '#/definitions/models.GetListCarResponse'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Get List Car
+      tags:
+      - Car
+    post:
+      consumes:
+      - application/json
+      description: Create Car
+      operationId: create_car
+      parameters:
+      - description: CreateCarRequestBody
+        in: body
+        name: Car
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateCar'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: GetCarBody
+          schema:
+            $ref: '#/definitions/models.Car'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Create Car
+      tags:
+      - Car
+  /car/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Car
+      operationId: delete_car
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: DeleteCarBody
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Delete Car
+      tags:
+      - Car
+    get:
+      consumes:
+      - application/json
+      description: Get By ID Car
+      operationId: get_by_id_car
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetCarBody
+          schema:
+            $ref: '#/definitions/models.Car'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Get By ID Car
+      tags:
+      - Car
+    put:
+      consumes:
+      - application/json
+      description: Update Car
+      operationId: update_car
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: UpdateCarRequestBody
+        in: body
+        name: Car
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateCarSwag'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: UpdateCarBody
+          schema:
+            $ref: '#/definitions/models.Car'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Update Car
+      tags:
+      - Car
+  /client:
+    get:
+      consumes:
+      - application/json
+      description: Get List Client
+      operationId: get_list_client
+      parameters:
+      - description: offset
+        in: query
+        name: offset
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetClientListBody
+          schema:
+            $ref: '#/definitions/models.GetListClientResponse'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Get List Client
+      tags:
+      - Client
+    post:
+      consumes:
+      - application/json
+      description: Create Client
+      operationId: create_client
+      parameters:
+      - description: CreateClientRequestBody
+        in: body
+        name: Client
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateClient'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: GetClientBody
+          schema:
+            $ref: '#/definitions/models.Client'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Create Client
+      tags:
+      - Client
+  /client/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Client
+      operationId: delete_client
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: DeleteClientBody
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Delete Client
+      tags:
+      - Client
+    get:
+      consumes:
+      - application/json
+      description: Get By ID Client
+      operationId: get_by_id_client
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetClientBody
+          schema:
+            $ref: '#/definitions/models.Client'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Get By ID Client
+      tags:
+      - Client
+    put:
+      consumes:
+      - application/json
+      description: Update Client
+      operationId: update_client
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: UpdateClientRequestBody
+        in: body
+        name: Client
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateClientSwag'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: UpdateClientBody
+          schema:
+            $ref: '#/definitions/models.Client'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Update Client
+      tags:
+      - Client
+  /investor:
+    get:
+      consumes:
+      - application/json
+      description: Get List Investor
+      operationId: get_list_Investor
+      parameters:
+      - description: offset
+        in: query
+        name: offset
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetInvestorListBody
+          schema:
+            $ref: '#/definitions/models.GetListInvestorResponse'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Get List Investor
+      tags:
+      - Investor
+    post:
+      consumes:
+      - application/json
+      description: Create Investor
+      operationId: create_Investor
+      parameters:
+      - description: CreateInvestorRequestBody
+        in: body
+        name: Investor
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateInvestor'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: GetInvestorBody
+          schema:
+            $ref: '#/definitions/models.Investor'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Create Investor
+      tags:
+      - Investor
+  /investor-share:
+    get:
+      consumes:
+      - application/json
+      description: Get List Investor
+      operationId: get_list_Investor
+      parameters:
+      - description: offset
+        in: query
+        name: offset
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetInvestorListBody
+          schema:
+            $ref: '#/definitions/models.GetListInvestorResponseFoyda'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Get List Investor
+      tags:
+      - Investor Share
+  /investor/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Investor
+      operationId: delete_Investor
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: DeleteInvestorBody
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Delete Investor
+      tags:
+      - Investor
+    get:
+      consumes:
+      - application/json
+      description: Get By ID Investor
+      operationId: get_by_id_investor
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetInvestorBody
+          schema:
+            $ref: '#/definitions/models.Investor'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Get By ID Investor
+      tags:
+      - Investor
+    put:
+      consumes:
+      - application/json
+      description: Update Investor
+      operationId: update_Investor
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: UpdateInvestorRequestBody
+        in: body
+        name: Investor
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateInvestorSwag'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: UpdateInvestorBody
+          schema:
+            $ref: '#/definitions/models.Investor'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Update Investor
+      tags:
+      - Investor
+  /order:
+    get:
+      consumes:
+      - application/json
+      description: Get List Order
+      operationId: get_list_order
+      parameters:
+      - description: offset
+        in: query
+        name: offset
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetOrderListBody
+          schema:
+            $ref: '#/definitions/models.GetListOrderResponse'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Get List Order
+      tags:
+      - Order
+    post:
+      consumes:
+      - application/json
+      description: Create Order
+      operationId: create_order
+      parameters:
+      - description: CreateOrderRequestBody
+        in: body
+        name: Order
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateOrder'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: GetOrderBody
+          schema:
+            $ref: '#/definitions/models.Order'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Create Order
+      tags:
+      - Order
+  /order/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Order
+      operationId: delete_order
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: DeleteOrderBody
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Delete Order
+      tags:
+      - Order
+    get:
+      consumes:
+      - application/json
+      description: Get By ID Order
+      operationId: get_by_id_order
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetOrderBody
+          schema:
+            $ref: '#/definitions/models.Order'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Get By ID Order
+      tags:
+      - Order
+    put:
+      consumes:
+      - application/json
+      description: Update Order
+      operationId: update_order
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: UpdateOrderRequestBody
+        in: body
+        name: Order
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateOrderSwag'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: UpdateOrderBody
+          schema:
+            $ref: '#/definitions/models.Order'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Update Order
+      tags:
+      - Order
+  /orderstatus/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update Order Status
+      operationId: update_order_status
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: UpdateStatusRequestBody
+        in: body
+        name: Order
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateStatusSwag'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: UpdateStatusBody
+          schema:
+            $ref: '#/definitions/models.Order'
+        "400":
+          description: Invalid Argumant
+          schema:
+            type: string
+        "500":
+          description: Server error
+          schema:
+            type: string
+      summary: Update Order Status
+      tags:
+      - Order Status
+swagger: "2.0"
